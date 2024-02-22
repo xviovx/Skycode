@@ -1,1 +1,57 @@
-/* You can add global styles to this file, and also import other style files */
+/* Toolbar styles */
+.toolbar {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff; 
+    color: #FFA726; 
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .toolbar img {
+    height: 50px; 
+  }
+  
+  /* Navigation Alignment to Right */
+  .toolbar nav {
+    display: flex;
+    margin-left: auto; /* Move nav to the right */
+  }
+  
+  .toolbar a {
+    color: #FFA726;
+    padding: 0 16px;
+    text-decoration: none;
+    line-height: 60px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .toolbar a:hover {
+    background-color: #FFCCBC;
+  }
+  
+  .toolbar button {
+    padding: 10px 16px;
+    background-color: #FFA726; 
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .toolbar button:hover {
+    background-color: #FB8C00; /* slightly darker orange for hover effect */
+  }
+  
+  /* Page Background */
+  body {
+    background-color: #FFECB3;
+  }
+  
