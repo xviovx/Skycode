@@ -4,13 +4,22 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { LoginComponent } from './components/login/login.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AuthGuard } from './services/authguard/authguard.service';
 
 const routes: Routes = [
-  { path: 'register', component: RegistrationComponent},
-  { path: 'login', component: LoginComponent},
-  { path: 'profile', component: UserProfileComponent},
-  { path: 'dashboard', component: DashboardComponent},
-  { path: '', redirectTo: '/register', pathMatch: 'full' } // default route
+  { path: 'register', component: RegistrationComponent },
+  { path: 'login', component: LoginComponent },
+  {
+    path: 'profile',
+    component: UserProfileComponent,
+    canActivate: [AuthGuard] // protect profile route
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard] // protect dashboard route
+  },
+  { path: '', redirectTo: '/register', pathMatch: 'full' } // Default route
 ];
 
 @NgModule({

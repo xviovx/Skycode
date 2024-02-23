@@ -48,6 +48,8 @@ export class RegistrationComponent {
         this.userService.submitRegistration(this.registrationForm.value).subscribe(response => {
           // handle successful reg
           console.log('Registration Successful', response);
+
+          localStorage.setItem('userToken', response.token);
   
           this.router.navigateByUrl('/dashboard');
         }, error => {
