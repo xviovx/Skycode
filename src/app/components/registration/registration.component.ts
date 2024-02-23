@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -30,7 +31,7 @@ export class RegistrationComponent {
   get password() { return this.registrationForm.get('password'); }
   get passwordConfirm() { return this.registrationForm.get('passwordConfirm'); }
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   onSubmit(): void {
     if (this.registrationForm.valid) {
@@ -43,15 +44,15 @@ export class RegistrationComponent {
           return;
         }
 
-        // Call the UserService to submit registration details
+        // call user service to submit registration details
         this.userService.submitRegistration(this.registrationForm.value).subscribe(response => {
-          // Handle successful registration
+          // handle successful reg
           console.log('Registration Successful', response);
-          // You can navigate to a different page or show a success message
+  
+          this.router.navigateByUrl('/dashboard');
         }, error => {
-          // Handle error scenario
+          // handle error scenario
           console.log('Registration Failed', error);
-          // Show an error message to the user
         });
       }
     }
