@@ -1,17 +1,27 @@
 .container {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.chart-container {
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  overflow: hidden;
+  width: 40%;
+  padding: 20px;
+
+  canvas {
+      width: 100% !important;
+      height: auto !important;
   }
-  
+}
+
+@media (max-width: 768px) {
   .chart-container {
-    width: 48%; /* Adjust as needed */
-    border-radius: 15px;
-    overflow: hidden; /* Ensures border radius applies properly */
+      width: 100%;
+      margin-bottom: 20px;
   }
-  
-  #pieChart,
-  #barChart {
-    width: 100%;
-    height: 300px; /* Adjust as needed */
-  }
-  
+}
