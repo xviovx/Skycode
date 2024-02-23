@@ -9,7 +9,7 @@ import { filter } from 'rxjs/operators';
 })
 export class AppComponent {
   title = 'Skycode';
-  showToolbar: boolean = true; // Declare the property
+  showToolbar: boolean = true;
 
   constructor(private router: Router) {
     this.router.events.pipe(

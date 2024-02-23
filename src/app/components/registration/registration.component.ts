@@ -7,8 +7,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent {
-  // Error message to display validation or submission errors
-  errorMessage: string | null = null;
 
   // Form group representing the registration form
   registrationForm: FormGroup = new FormGroup({
