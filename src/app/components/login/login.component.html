@@ -1,1 +1,26 @@
-<p>login works!</p>
+<div class="login-container">
+    <div class="bubble-top-right"></div>
+    <div class="bubble-bottom-left"></div>
+
+    <div class="logo" style="margin-top: 50px;"></div>
+
+    <h1>Login</h1>
+    
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+            <mat-label>Email Address</mat-label>
+            <input matInput formControlName="email" type="email">
+            <mat-error *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</mat-error>
+            <mat-error *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" type="password">
+            <mat-error *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button type="submit" [disabled]="!loginForm.valid" class="confirm-button">Login</button>
+        
+    </form>
+</div>

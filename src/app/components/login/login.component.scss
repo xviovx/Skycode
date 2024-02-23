@@ -1,0 +1,120 @@
+.login-container {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(#FFECB3, #FFE0B2); 
+    
+    .logo {
+        width: 120px;
+        height: 120px;
+        background: url('../../../assets/logo.png') center/contain no-repeat;
+    }
+
+    form {
+        width: 100%;
+        max-width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+h1 {
+    font-family: 'Roboto', 'sans-serif';
+    font-weight: bold;
+    font-size: 28px;
+    letter-spacing: 3px;
+    margin-top: 25px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
+}
+
+mat-form-field {
+    width: 100%;
+    margin: 18px 0;
+
+    .mat-form-field-wrapper {
+        padding-bottom: 0;
+    }
+}
+
+.confirm-button {
+    width: 100%;
+    background-color: #FFA726; 
+    color: white;
+    height: 55px;
+    margin-top: 15px;
+}
+
+.confirm-button[disabled] {
+    background-color: #FFCCBC; 
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.footer {
+    margin-top: 20px;
+
+    a {
+        text-decoration: none;
+        color: #FFA726;
+        font-weight: 700;
+    }
+
+    a:hover {
+        color: #FFCCBC; 
+        font-weight: 800;
+    }
+}
+
+.bubble-top-right, .bubble-bottom-left {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    opacity: 0.2; 
+    background-color: #8f2100; 
+    border-radius: 50%;
+    animation: bubbleMove 3s infinite alternate;
+    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+.bubble-top-right {
+    top: -20%;   
+    right: -20%;
+    animation-delay: 0.5s;
+}
+
+.bubble-bottom-left {
+    bottom: -20%; 
+    left: -20%;
+    animation-duration: 3.2s;
+}
+
+@keyframes bubbleMove {
+    0%, 100% {
+        transform: translateY(-30px);
+    }
+    50% {
+        transform: translateY(30px);
+    }
+}
+
+// Media query for tablet devices
+@media (max-width: 768px) {
+    .login-container .bubble-top-right, 
+    .login-container .bubble-bottom-left {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+// Media query for mobile devices
+@media (max-width: 480px) {
+    .login-container .bubble-top-right, 
+    .login-container .bubble-bottom-left {
+        width: 100px; 
+        height: 100px;
+    }
+}

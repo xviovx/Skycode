@@ -15,9 +15,9 @@ export class AppComponent {
     this.router.events.pipe(
       filter((event: RouterEvent): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
-      this.showToolbar = !event.url.includes('/register');
+      this.showToolbar = !(event.url.includes('/register') || event.url.includes('/login'));
     });
-  }
+  }  
 
   logout(): void {
     localStorage.removeItem('userToken');
