@@ -2,6 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { LoginComponent } from './login.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // setup tests for LoginComponent
 describe('LoginComponent', () => {
@@ -12,7 +15,7 @@ describe('LoginComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       // import necessary modules
-      imports: [ReactiveFormsModule, FormsModule, RouterTestingModule],
+      imports: [ReactiveFormsModule, FormsModule, RouterTestingModule, MatFormFieldModule, MatInputModule, BrowserAnimationsModule],
       // declare component
       declarations: [ LoginComponent ]
     }).compileComponents();
