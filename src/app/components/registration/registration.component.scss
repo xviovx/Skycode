@@ -1,0 +1,118 @@
+.container {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(#FFECB3, #FFE0B2); // Off-shade of orange/white gradient
+    
+    .logo {
+        width: 60px;
+        height: 60px;
+        background: url('../../../assets/logo.png') center/contain no-repeat;
+    }
+
+    form {
+        width: 100%;
+        max-width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+h1, p, .error-message {
+    color: #333; // Darker text for better contrast on light background
+}
+
+h1 {
+    font-family: 'Roboto', 'sans-serif';
+    font-weight: bold;
+    font-size: 28px;
+    letter-spacing: 3px;
+    margin-top: 25px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); // Lighter shadow for better blend with background
+}
+
+p, .error-message {
+    font-family: 'Poppins';
+    letter-spacing: 1px; // Slightly reduced for aesthetic preference on light background
+    font-size: 12px;
+}
+
+.error-message {
+    font-size: 14px;
+    color: #D32F2F; // Standard error color
+    margin-top: 15px;
+}
+
+mat-form-field {
+    width: 100%;
+    margin: 10px 0;
+
+    .mat-form-field-wrapper {
+        padding-bottom: 0;
+    }
+}
+
+.confirm-button {
+    width: 100%;
+    background-color: #FFA726; // Orange shade for the button
+    color: white;
+    height: 55px;
+    margin-top: 15px;
+}
+
+.confirm-button[disabled] {
+    background-color: #FFCCBC; // Lighter orange for disabled state
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.footer {
+    margin-top: 20px;
+
+    a {
+        text-decoration: none;
+        color: #FFA726; // Orange text for links
+        font-weight: 700;
+    }
+
+    a:hover {
+        color: #FFCCBC; // Lighter orange on hover
+        font-weight: 800;
+    }
+}
+
+.bubble-top-right, .bubble-bottom-left {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    opacity: 0.2; // Slightly more visible
+    background-color: #fd673a; // Light orange bubbles
+    border-radius: 50%;
+    animation: bubbleMove 3s infinite alternate;
+    animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+.bubble-top-right {
+    top: -20%;   
+    right: -20%;
+    animation-delay: 0.5s;
+}
+
+.bubble-bottom-left {
+    bottom: -20%; 
+    left: -20%;
+    animation-duration: 3.2s;
+}
+
+@keyframes bubbleMove {
+    0%, 100% {
+        transform: translateY(-30px);
+    }
+    50% {
+        transform: translateY(30px);
+    }
+}
