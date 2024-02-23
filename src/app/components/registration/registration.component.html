@@ -9,31 +9,31 @@
         <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
             <input matInput formControlName="name" type="text">
-            <mat-error *ngIf="name?.errors?.['required']">Name is required.</mat-error>
-            <mat-error *ngIf="name?.errors?.['pattern']">Only letters are allowed.</mat-error>
+            <mat-error *ngIf="registrationForm.get('name')?.errors?.['required']">Name is required.</mat-error>
+            <mat-error *ngIf="registrationForm.get('name')?.errors?.['pattern']">Only letters are allowed.</mat-error>
         </mat-form-field>
-
+        
         <mat-form-field appearance="outline">
             <mat-label>Email Address</mat-label>
             <input matInput formControlName="email" type="email" (change)="checkEmailAvailability()">
-            <mat-error *ngIf="email?.errors?.['required']">Email is required.</mat-error>
-            <mat-error *ngIf="email?.errors?.['email']">Invalid email format.</mat-error>
-            <mat-error *ngIf="email?.errors?.['emailTaken']">This email is already taken.</mat-error>
-        </mat-form-field>          
+            <mat-error *ngIf="registrationForm.get('email')?.errors?.['required']">Email is required.</mat-error>
+            <mat-error *ngIf="registrationForm.get('email')?.errors?.['email']">Invalid email format.</mat-error>
+            <mat-error *ngIf="registrationForm.get('email')?.errors?.['emailTaken']">This email is already taken.</mat-error>
+        </mat-form-field>
         
         <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
             <input matInput formControlName="password" type="password">
-            <mat-error *ngIf="password?.errors?.['required']">Password is required.</mat-error>
-            <mat-error *ngIf="password?.errors?.['minlength']">Password must be at least 8 characters.</mat-error>
-        </mat-form-field>
+            <mat-error *ngIf="registrationForm.get('password')?.errors?.['required']">Password is required.</mat-error>
+            <mat-error *ngIf="registrationForm.get('password')?.errors?.['minlength']">Password must be at least 8 characters.</mat-error>
+        </mat-form-field>        
         
         <mat-form-field appearance="outline">
             <mat-label>Confirm Password</mat-label>
             <input matInput formControlName="passwordConfirm" type="password">
-            <mat-error *ngIf="passwordConfirm?.errors?.['required']">Password confirmation is required.</mat-error>
-            <mat-error *ngIf="password?.value !== passwordConfirm?.value">Passwords do not match.</mat-error>
-        </mat-form-field>
+            <mat-error *ngIf="registrationForm.get('passwordConfirm')?.errors?.['required']">Password confirmation is required.</mat-error>
+            <mat-error *ngIf="registrationForm.hasError('passwordMismatch')">Passwords do not match.</mat-error>
+        </mat-form-field>        
         
         <button mat-raised-button class="confirm-button" type="submit" [disabled]="!registrationForm.valid">
             CONFIRM

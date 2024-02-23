@@ -22,9 +22,6 @@
     }
 }
 
-h1, p, .error-message {
-    color: #333; 
-}
 
 h1 {
     font-family: 'Roboto', 'sans-serif';
@@ -33,18 +30,6 @@ h1 {
     letter-spacing: 3px;
     margin-top: 25px;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
-}
-
-p, .error-message {
-    font-family: 'Poppins';
-    letter-spacing: 1px; 
-    font-size: 12px;
-}
-
-.error-message {
-    font-size: 14px;
-    color: #D32F2F; 
-    margin-top: 15px;
 }
 
 mat-form-field {
