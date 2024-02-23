@@ -65,10 +65,11 @@ export class RegistrationComponent {
     const emailControl = this.registrationForm.get('email');
     if (emailControl && emailControl.valid) {
       this.userService.checkEmailAvailability(emailControl.value).subscribe(isAvailable => {
+        console.log(`Email ${emailControl.value} availability: ${isAvailable}`);
         if (!isAvailable) {
           emailControl.setErrors({ 'emailTaken': true });
         }
       });
     }
-  }
+  }  
 }
