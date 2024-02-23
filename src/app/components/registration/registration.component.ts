@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-registration',
@@ -8,44 +9,63 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class RegistrationComponent {
 
-  // Form group representing the registration form
+  // form group for registration form
   registrationForm: FormGroup = new FormGroup({
-    // Name control with required validation and pattern (only letters and spaces)
+    // name control with required validation and pattern (only letters and spaces)
     name: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)]),
 
-    // Email control with required validation and email format validation
+    // email control with required validation and email format validation
     email: new FormControl('', [Validators.required, Validators.email]),
 
-    // Password control with required validation and minimum length of 8 characters
+    // password control with required validation and minimum length of 8 characters
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
 
-    // Password confirmation control with required validation
+    // password confirmation control with required validation
     passwordConfirm: new FormControl('', Validators.required)
   });
 
-  // Convenience getters for easy access to form controls from the template
+  // convenience getters for easy access to form controls from the template
   get name() { return this.registrationForm.get('name'); }
   get email() { return this.registrationForm.get('email'); }
   get password() { return this.registrationForm.get('password'); }
   get passwordConfirm() { return this.registrationForm.get('passwordConfirm'); }
 
+  constructor(private userService: UserService) {}
+
   onSubmit(): void {
-    // Validate the form before submission
     if (this.registrationForm.valid) {
       const passwordControl = this.registrationForm.get('password');
       const passwordConfirmControl = this.registrationForm.get('passwordConfirm');
 
-      // Ensure both password fields are not null (TypeScript strict null checks)
       if (passwordControl && passwordConfirmControl) {
-        // Check if password and confirm password values match
         if (passwordControl.value !== passwordConfirmControl.value) {
-          // Set error on passwordConfirm control if passwords do not match
           passwordConfirmControl.setErrors({ 'passwordMismatch': true });
-        } else {
-          // TODO: Implement registration logic here
-          // Potential use of a service to handle user registration
+          return;
         }
+
+        // Call the UserService to submit registration details
+        this.userService.submitRegistration(this.registrationForm.value).subscribe(response => {
+          // Handle successful registration
+          console.log('Registration Successful', response);
+          // You can navigate to a different page or show a success message
+        }, error => {
+          // Handle error scenario
+          console.log('Registration Failed', error);
+          // Show an error message to the user
+        });
       }
+    }
+  }
+
+  // method to check email availability
+  checkEmailAvailability(): void {
+    const emailControl = this.registrationForm.get('email');
+    if (emailControl && emailControl.valid) {
+      this.userService.checkEmailAvailability(emailControl.value).subscribe(isAvailable => {
+        if (!isAvailable) {
+          emailControl.setErrors({ 'emailTaken': true });
+        }
+      });
     }
   }
 }

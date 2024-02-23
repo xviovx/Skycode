@@ -15,10 +15,11 @@
 
         <mat-form-field appearance="outline">
             <mat-label>Email Address</mat-label>
-            <input matInput formControlName="email" type="email">
+            <input matInput formControlName="email" type="email" (change)="checkEmailAvailability()">
             <mat-error *ngIf="email?.errors?.['required']">Email is required.</mat-error>
             <mat-error *ngIf="email?.errors?.['email']">Invalid email format.</mat-error>
-        </mat-form-field>
+            <mat-error *ngIf="email?.errors?.['emailTaken']">This email is already taken.</mat-error>
+        </mat-form-field>          
         
         <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
