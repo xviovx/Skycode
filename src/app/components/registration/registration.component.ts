@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user/user.service';
 import { Router } from '@angular/router';
 
+// user data structure
 interface User {
   name: string;
   email: string;
@@ -16,6 +17,7 @@ interface User {
 })
 export class RegistrationComponent {
 
+  // define form controls and validation rules
   registrationForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)]),
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -25,16 +27,20 @@ export class RegistrationComponent {
 
   constructor(private userService: UserService, private router: Router) {}
 
+  // handle form submission
   onSubmit(): void {
+    // check form validity and password match
     if (this.registrationForm.valid && this.registrationForm.get('password')?.value === this.registrationForm.get('passwordConfirm')?.value) {
+      // prepare user data for storage
       const user: User = {
         name: this.registrationForm.get('name')?.value,
         email: this.registrationForm.get('email')?.value,
         profileCreationDate: new Date().toISOString(),
       };
 
+      // submit form data and handle response
       this.userService.submitRegistration(this.registrationForm.value).subscribe(response => {
-        console.log('Registration Successful', response);
+        // store user data and navigate to dashboard
         localStorage.setItem('userToken', response.token); 
         localStorage.setItem('mockUserData', JSON.stringify(user)); 
         this.router.navigateByUrl('/dashboard');
@@ -42,15 +48,18 @@ export class RegistrationComponent {
         console.log('Registration Failed', error);
       });
     } else {
+      // handle password mismatch
       if (this.registrationForm.get('password')?.value !== this.registrationForm.get('passwordConfirm')?.value) {
         this.registrationForm.get('passwordConfirm')?.setErrors({ 'passwordMismatch': true });
       }
     }
   }
 
+  // check email availability
   checkEmailAvailability(): void {
     const emailControl = this.registrationForm.get('email');
     if (emailControl && emailControl.valid) {
+      // validate email and update form status
       this.userService.checkEmailAvailability(emailControl.value).subscribe(isAvailable => {
         if (!isAvailable) {
           emailControl.setErrors({ 'emailTaken': true });

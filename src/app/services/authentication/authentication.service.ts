@@ -7,11 +7,10 @@ export class AuthenticationService {
 
   constructor() { }
 
+  // check if user is authenticated
   isAuthenticated(): boolean {
     const token = localStorage.getItem('userToken');
-    if (token) {
-      return true;
-    }
-    return false;
+    // return true if token exists, else false
+    return !!token;
   }
 }
