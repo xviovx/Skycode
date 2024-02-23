@@ -11,36 +11,35 @@ export class DashboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.createPieChart();
-    this.createBarChart();
+    this.createCharts();
   }
 
-  private createPieChart(): void {
+  private createCharts(): void {
+    // Retrieve login attempt data
+    const loginAttempts = JSON.parse(localStorage.getItem('loginAttempts') || '{"success": 0, "failed": 0}');
+
+    this.createPieChart(loginAttempts);
+    this.createBarChart(loginAttempts);
+  }
+
+  private createPieChart(loginAttempts: any): void {
     const ctx = document.getElementById('pieChart') as HTMLCanvasElement;
 
     if (ctx) {
-      const pieChart = new Chart(ctx, {
+      new Chart(ctx, {
         type: 'pie',
         data: {
-          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          labels: ['Successful Logins', 'Failed Logins'],
           datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            label: 'Login Attempts',
+            data: [loginAttempts.success, loginAttempts.failed],
             backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
               'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)'
+              'rgba(255, 99, 132, 0.2)'
             ],
             borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
               'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)'
+              'rgba(255, 99, 132, 1)'
             ],
             borderWidth: 1
           }]
@@ -55,32 +54,24 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  private createBarChart(): void {
+  private createBarChart(loginAttempts: any): void {
     const ctx = document.getElementById('barChart') as HTMLCanvasElement;
 
     if (ctx) {
-      const barChart = new Chart(ctx, {
+      new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          labels: ['Successful Logins', 'Failed Logins'],
           datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            label: 'Login Attempts',
+            data: [loginAttempts.success, loginAttempts.failed],
             backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
               'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)'
+              'rgba(255, 99, 132, 0.2)'
             ],
             borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
               'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)'
+              'rgba(255, 99, 132, 1)'
             ],
             borderWidth: 1
           }]

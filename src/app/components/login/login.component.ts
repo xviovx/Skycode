@@ -7,6 +7,11 @@ interface User {
   password: string;
 }
 
+interface LoginAttempts {
+  success: number;
+  failed: number;
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -25,17 +30,25 @@ export class LoginComponent {
       const email = this.loginForm.get('email')?.value;
       const password = this.loginForm.get('password')?.value;
 
+      // get user data and login attempts data from local storage
       const storedUsers = localStorage.getItem('mockUserDatabase');
       const users: User[] = storedUsers ? JSON.parse(storedUsers) : [];
+      const loginAttempts: LoginAttempts = JSON.parse(localStorage.getItem('loginAttempts') || '{"success": 0, "failed": 0}');
 
+      // check if user exists
       const userExists = users.some((user: User) => user.email === email && user.password === password);
-      
+
       if (userExists) {
-        localStorage.setItem('userToken', 'mock-token'); 
+        loginAttempts.success += 1;
+        localStorage.setItem('userToken', 'mock-token'); // mock token for simulation
         this.router.navigateByUrl('/dashboard');
       } else {
+        loginAttempts.failed += 1;
         alert('Invalid credentials');
       }
+
+      // save login data
+      localStorage.setItem('loginAttempts', JSON.stringify(loginAttempts));
     }
   }
 }
