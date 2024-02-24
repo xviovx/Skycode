@@ -42,7 +42,7 @@ export class RegistrationComponent {
       // submit form data and handle response
       this.userService.submitRegistration(this.registrationForm.value).subscribe({
         next: (response) => {
-          localStorage.setItem('userToken', response.token);
+          localStorage.setItem('userToken', response.token); //wherein a token would be presumably returned in a real-world scenario
           localStorage.setItem('mockUserData', JSON.stringify(user));
           this.router.navigateByUrl('/dashboard');
         },
