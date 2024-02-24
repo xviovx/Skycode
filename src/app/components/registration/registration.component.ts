@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user/user.service';
 import { Router } from '@angular/router';
+import { passwordMatchValidator } from './password-validator';
 
 // user data structure
 interface User {
@@ -15,7 +16,7 @@ interface User {
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss']
 })
-export class RegistrationComponent {
+export class RegistrationComponent { 
 
   // define form controls and validation rules
   registrationForm: FormGroup = new FormGroup({
@@ -23,7 +24,7 @@ export class RegistrationComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
     passwordConfirm: new FormControl('', Validators.required)
-  });
+  }, {validators: passwordMatchValidator });
 
   constructor(private userService: UserService, private router: Router) {}
 
@@ -48,10 +49,7 @@ export class RegistrationComponent {
         console.log('Registration Failed', error);
       });
     } else {
-      // handle password mismatch
-      if (this.registrationForm.get('password')?.value !== this.registrationForm.get('passwordConfirm')?.value) {
-        this.registrationForm.get('passwordConfirm')?.setErrors({ 'passwordMismatch': true });
-      }
+      // more specific error handling could be added here if necessary
     }
   }
 
