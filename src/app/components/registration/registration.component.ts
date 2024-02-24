@@ -40,13 +40,15 @@ export class RegistrationComponent {
       };
 
       // submit form data and handle response
-      this.userService.submitRegistration(this.registrationForm.value).subscribe(response => {
-        // store user data and navigate to dashboard
-        localStorage.setItem('userToken', response.token); 
-        localStorage.setItem('mockUserData', JSON.stringify(user)); 
-        this.router.navigateByUrl('/dashboard');
-      }, error => {
-        console.log('Registration Failed', error);
+      this.userService.submitRegistration(this.registrationForm.value).subscribe({
+        next: (response) => {
+          localStorage.setItem('userToken', response.token);
+          localStorage.setItem('mockUserData', JSON.stringify(user));
+          this.router.navigateByUrl('/dashboard');
+        },
+        error: (error) => {
+          console.log('Registration Failed', error);
+        }
       });
     } else {
       // more specific error handling could be added here if necessary
